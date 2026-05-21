@@ -119,27 +119,6 @@ classDiagram
             + empresa: String
             + freqRecompraDias: int
             + vendedor: Usuario
-        }
-        class Ligacao {
-            <<Entity>>
-            + id: Long
-            + cliente: Cliente
-            + vendedor: Usuario
-            + resultado: enum
-            + origem: enum
-        }
-    }
-
-
-    class H2Database {
-        <<Database>>
-        jdbc:h2:mem:admrconect
-        usuarios
-        clientes
-        pedidos
-        ligacoes
-    }
-	
 
     UsuarioController ..> UsuarioService : usa
     PedidoController ..> PedidoService : usa
