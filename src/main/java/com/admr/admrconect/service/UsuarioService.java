@@ -11,6 +11,9 @@ import java.util.List;
 public class UsuarioService {
 
     @Autowired
+    private UsuarioRepository repository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     public Usuario salvar(Usuario usuario) {
