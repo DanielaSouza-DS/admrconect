@@ -3,8 +3,8 @@ package com.admr.admrconect.service;
 import com.admr.admrconect.model.Usuario;
 import com.admr.admrconect.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
