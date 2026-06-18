@@ -13,7 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-// @SpringBootTest = sobe o Spring completo para testar
 @SpringBootTest
 class AdmrconectApplicationTests {
 
@@ -26,27 +25,22 @@ class AdmrconectApplicationTests {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    // Roda antes de cada teste — limpa o banco
     @BeforeEach
     void limparBanco() {
         usuarioRepository.deleteAll();
     }
 
-    // ── Testes de Usuario ──────────────────────────────────
 
     @Test
     void deveSalvarUsuarioComSucesso() {
-        // DADO um usuario novo
         Usuario u = new Usuario();
         u.setNome("Joao Silva");
         u.setEmail("joao@admr.com");
         u.setSenha("123456");
         u.setTipoUsuario(Perfil.VENDEDOR);
 
-        // QUANDO salvar
         Usuario salvo = usuarioService.salvar(u);
 
-        // ENTAO deve ter ID gerado e nome correto
         assertNotNull(salvo.getId());
         assertEquals("Joao Silva", salvo.getNome());
         assertEquals(Perfil.VENDEDOR, salvo.getTipoUsuario());
@@ -54,29 +48,24 @@ class AdmrconectApplicationTests {
     }
 
     @Test
-    void naoDeveSalvarUsuarioComEmailDuplicado() {
-        // DADO um usuario ja salvo
-        Usuario u1 = new Usuario();
+    void naoDeveSalvarUsuarioComEmailDuplicado() {Usuario u1 = new Usuario();
         u1.setNome("Ana Costa");
         u1.setEmail("ana@admr.com");
         u1.setSenha("123");
         u1.setTipoUsuario(Perfil.GERENTE);
         usuarioService.salvar(u1);
 
-        // QUANDO tentar salvar outro com o mesmo email
         Usuario u2 = new Usuario();
         u2.setNome("Ana Outra");
         u2.setEmail("ana@admr.com");
         u2.setSenha("456");
         u2.setTipoUsuario(Perfil.VENDEDOR);
 
-        // ENTAO deve lancar excecao
         assertThrows(RuntimeException.class, () -> usuarioService.salvar(u2));
     }
 
     @Test
     void deveListarUsuarios() {
-        // DADO dois usuarios salvos
         Usuario u1 = new Usuario();
         u1.setNome("Carlos"); u1.setEmail("carlos@admr.com");
         u1.setSenha("123"); u1.setTipoUsuario(Perfil.ESTOQUISTA);
@@ -88,10 +77,8 @@ class AdmrconectApplicationTests {
         usuarioService.salvar(u1);
         usuarioService.salvar(u2);
 
-        // QUANDO listar
         var lista = usuarioService.listar();
 
-        // ENTAO deve ter 2 usuarios
         assertEquals(2, lista.size());
     }
 
@@ -119,7 +106,6 @@ class AdmrconectApplicationTests {
         assertThrows(RuntimeException.class, () -> usuarioService.buscar(salvo.getId()));
     }
 
-    // ── Testes de Produto ──────────────────────────────────
 
     @Test
     void deveSalvarProdutoComSucesso() {
@@ -143,16 +129,15 @@ class AdmrconectApplicationTests {
         p.setNome("Pneu Continental HDR2");
         p.setCodigo("CONT-HDR2");
         p.setPrecoUnitario(920.00);
-        p.setQuantidade(10); // abaixo do minimo (30)
+        p.setQuantidade(10);
 
         Produto salvo = produtoService.salvar(p);
 
-        assertTrue(salvo.isEstoqueBaixo()); // 10 < 30
+        assertTrue(salvo.isEstoqueBaixo());
     }
 
     @Test
     void contextLoads() {
-        // Verifica se o Spring sobe sem erros
         assertNotNull(usuarioService);
         assertNotNull(produtoService);
     }
