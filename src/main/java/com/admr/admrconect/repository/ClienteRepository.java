@@ -10,10 +10,8 @@ import java.util.List;
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
-    // Busca todos os clientes de um vendedor especifico
     List<Cliente> findByVendedor(Usuario vendedor);
 
-    // Busca por nome contendo o texto (busca parcial)
     List<Cliente> findByNomeContainingIgnoreCase(String nome);
 
     boolean existsByTelefone(String telefone);

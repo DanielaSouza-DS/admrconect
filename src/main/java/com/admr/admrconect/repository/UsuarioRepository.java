@@ -1,8 +1,3 @@
-// ─────────────────────────────────────────────────────
-// UsuarioRepository.java
-// ─────────────────────────────────────────────────────
-// CRIE ESTE ARQUIVO EM: repository/UsuarioRepository.java
-
 package com.admr.admrconect.repository;
 
 import com.admr.admrconect.enums.Perfil;
@@ -13,8 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-// JpaRepository ja vem com: save, findAll, findById, deleteById, etc.
-// Os metodos abaixo o Spring cria automaticamente pelo nome!
+
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
