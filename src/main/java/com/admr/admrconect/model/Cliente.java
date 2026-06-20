@@ -18,13 +18,13 @@ public class Cliente {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = false)
+    @JoinColumn(name = "usuario_id", nullable = true)
     private Usuario vendedor;
 
     @Column(nullable = false)
     private String nome;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String telefone;
 
     private String empresa;
